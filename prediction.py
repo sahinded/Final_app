@@ -21,30 +21,12 @@ app=FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
-# @app.get("/")
-# async def read_root(request: Request):
-#     return templates.TemplateResponse("base.html", {"request": request})
 
-# @app.get('/', status_code=200)
-# async def healthcheck():
-#     return 'Iris classifier is ready to go!'
 
 class Iris(BaseModel):
     data: List[conlist(float, min_items=4, max_items=4)]
 
 
-# @app.post('/predict', tags=["predictions"])
-# async def getprediction(iris: Iris):
-#     model = joblib.load(open('model/final_model_joblib','rb'))
-#     data = dict(iris)['data']
-#     prediction = model.predict(data).tolist()
-#     log_proba =  model.predict_log_proba(data).tolist()
-#     return {"prediction": prediction,
-#             "probabilities": log_proba}
-            
-# @app.get("/main", response_class=HTMLResponse)
-# def home_func(request: Request):#, L1:float = Form(...), W1:float = Form(...), L2:float = Form(...), W2:float=Form(...)):
-#     return templates.TemplateResponse("index.html", {"request":request})
 
 @app.get("/", response_class=HTMLResponse)
 async def home_page(request: Request):
