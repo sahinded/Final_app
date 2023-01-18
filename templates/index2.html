@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <style>
+         img {
+         border: 5px solid rgb(149, 120, 156);
+         border-radius: 10px;
+         padding: 10px;
+         width: 400px;
+         display: block;
+         margin-left: auto;
+         margin-right: auto;
+         }
+         h1 {text-align: center;}
+         p {text-align: center;}
+         div {text-align: center;}
+      </style>
+   </head>
+   <body style="background-color: #d5d0e3;">
+      <h1 style="color:blue"> IRIS SPECIES CLASSIFICATION TOOLS</h1>
+      <div class="row">
+         <div class=" 'col 12 m10 offset- ml center">
+            <p style="color:blue; font-size:30px">Identifying Iris Setosa, Versicolor & Virginica Species</p>
+            <img src="../static/title.png" alt="Title"  width="500" height="250" class="center" style="width:500px">
+            <a href="{{url_for('index')}}" class = 'btn btn-small waves-effect waves-dark'>Reset</a>
+         </div>
+      </div>
+      <section>
+         <div>
+            <form action='/home' method='get'>
+              <label for= "sepal_length">Sepal Length </label>
+              <input type="text" name="sepal_length"><br>
+              <label for= "sepal_width" > Sepal Width </label>
+              <input type="text" name="sepal_width"><br>
+              <label for="petal_length"> Petal Length </label>
+              <input type="text" name="petal_length"><br>
+              <label for="petal width"> Petal Width </label>
+              <input type="text" name="petal_width"><br>
+            </form>
+        </div>
+         <center>
+            <input type="reset"  value="Clear"  class="btn btn-small purple waves-effect waves-dark">
+         </center>
+         <h2 style="color:#C703A3">Prediction  : {{ prediction }}</h2>
+      </section>
+      <p></p>
+      <p></p>
+   </body>
+</html>

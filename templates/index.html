@@ -1,0 +1,112 @@
+<html>
+
+<head>
+   <style>
+      img {
+         border: 5px solid rgb(149, 120, 156);
+         border-radius: 10px;
+         padding: 10px;
+         width: 400px;
+         display: block;
+         margin-left: auto;
+         margin-right: auto;
+      }
+
+      h1 {
+         text-align: center;
+      }
+
+      p {
+         text-align: center;
+      }
+
+      div {
+         text-align: center;
+      }
+   </style>
+</head>
+
+<body style="background-color: #d5d0e3;">
+
+
+   <h1 style="color:blue"> IRIS SPECIES CLASSIFICATION TOOLS</h1>
+   <div class="row">
+      <div class=" 'col 12 m10 offset- ml center">
+         <p style="color:blue; font-size:30px">Identifying Iris Setosa, Versicolor & Virginica Species</p>
+         <img src="../static/title.png" alt="Title" width="500" height="250" class="center" style="width:500px">
+      </div>
+   </div>
+   <section>
+      <div>
+         <p id="error" style="color:red"></p>
+         <form id="predictForm" action="/predict" method='post'>
+            <label for="SepalLength">Sepal Length</label>
+            <input type="text" name="SepalLength"><br>
+            <label for="SepalWidth">Sepal Width</label>
+            <input type="text" name="SepalWidth"><br>
+            <label for="PetalLength">Petal Length</label>
+            <input type="text" name="PetalLength"><br>
+            <label for="PetalWidth">Petal Width</label>
+            <input type="text" name="PetalWidth"><br>
+            <input type="submit" class="btn btn-small purple waves-effect waves-dark">
+            <input type="button" class="btn btn-small purple waves-effect waves-dark" id="clear" value="Clear" />
+         </form>
+      </div>
+      <center>
+
+         <h2 style="color:#C703A3">Prediction : <span id="result"></span></h2>
+      </center>
+   </section>
+   <!-- <h2 style="color:#C703A3">Prediction : {{ prediction }}</h2>
+   <h2 style="color:#C703A3">Probability : {{ Prob }}</h2> -->
+
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+
+
+   <script type="text/javascript">
+
+      $(document).ready(function () {
+         $("#predictForm").on('submit', (function (e) {
+            e.preventDefault();
+            $("#result").html("");
+            $.ajax({
+               url: $(this).attr('action'),
+               type: "POST",
+               data: new FormData(this),
+               contentType: false,
+               cache: false,
+               processData: false,
+               success: function (response) {
+                  $("#error").html("");
+                  response.forEach(element => {
+                     $("#result").append('<span>' + element + '</span><br>');
+                  });
+
+               },
+               error: function (e) {
+                  $("#error").html("Error Submitting, please check form values again, (must be a number)");
+               }
+            });
+         }));
+
+
+         $("#clear").on('click', (function (e) {
+            $("#error").html("");
+            $("#result").html("");
+            $("#predictForm").trigger("reset");
+
+         }));
+      });
+
+
+
+
+
+
+   </script>
+
+</body>
+
+</html>
